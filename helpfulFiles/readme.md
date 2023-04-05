@@ -1,5 +1,10 @@
 # Progress Tracker
 
+Environment Versions
+Truffle v5.0.2 (core: 5.0.2)
+Solidity - ^0.4.24 (solc-js)
+Node v14.21.3
+
 ## 3/31/2022
 ### Notes
 All Contracts are done I think, seem to be passing tests, pretty sure functionality is complete
