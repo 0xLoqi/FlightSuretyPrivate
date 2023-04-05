@@ -1,12 +1,18 @@
 # Progress Tracker
 
-Environment Versions
+## Environment Versions
 Truffle v5.0.2 (core: 5.0.2)
 Solidity - ^0.4.24 (solc-js)
 Node v14.21.3
 
-## 3/31/2022
-### Notes
+## To get started again
+Run: 'npm run dapp' to start UI
+Run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20
+Run: 'npm run server' to start oracle server
+Run: 'Truffle migrate' if Operational Status isn't working in Dapp
+
+## Notes
+### 3/31/2022
 All Contracts are done I think, seem to be passing tests, pretty sure functionality is complete
 probably would want to run through tests again (maybe just check rubric for requirements)
 
@@ -21,14 +27,17 @@ https://www.notion.so/elijahwilbanks/Final-Project-Rubric-edfb4d3d523248a3bc7bd8
 
 Due date is exactly 14 days away, should be easy to finish in time
 
-### To get started again
-Run: 'npm run dapp' to start UI
-Run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20
-Run: 'npm run server' to start oracle server
-Run: 'Truffle migrate' if Operational Status isn't working in Dapp
+////////////////////////////////////////////////////////////////////////////
+
+### 4/05/2022
+Oracle tests were fixed, still need to create another test to validate payouts on bad status, should be easy enough to just copy test and change status code
+Also still need to link frontend to smart contracts
+Also need to look over requirements and make sure everything is done
+
+////////////////////////////////////////////////////////////////////////////
 
 
-//Udacity notes begin here
+# Udacity notes begin here
 # FlightSurety
 
 FlightSurety is a sample application project for Udacity's Blockchain course.

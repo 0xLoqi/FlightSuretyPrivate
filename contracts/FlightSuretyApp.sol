@@ -201,7 +201,7 @@ contract FlightSuretyApp {
 
     // Number of oracles that must respond for valid status
     // Set to 1 for testing purposes
-    uint256 private constant MIN_RESPONSES = 2;
+    uint256 private constant MIN_RESPONSES = 3;
 
     struct Oracle {
         bool isRegistered;
