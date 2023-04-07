@@ -9,7 +9,6 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 
 contract('Flight Surety Tests', async (accounts) => {
 
-
     var config;
     before('setup contract', async () => {
         config = await Test.Config(accounts);
@@ -73,25 +72,6 @@ contract('Flight Surety Tests', async (accounts) => {
         await config.flightSuretyData.setOperatingStatus(true);
 
     });
-
-    // it('(airline) cannot register an Airline using registerAirline() if it is not funded', async () => {
-
-    //     // ARRANGE
-    //     let newAirline = accounts[2];
-
-    //     // ACT
-    //     try {
-    //         await config.flightSuretyApp.registerAirline(newAirline, { from: config.firstAirline });
-    //     }
-    //     catch (e) {
-
-    //     }
-    //     let result = await config.flightSuretyData.isAirline.call(newAirline);
-
-    //     // ASSERT
-    //     assert.equal(result, false, "Airline should not be able to register another airline if it hasn't provided funding");
-
-    // });
     //ADDITIONAL TESTS
     it('(airline) can register an Airline using registerAirline() if it is funded', async () => {
         // ARRANGE

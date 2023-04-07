@@ -36,6 +36,12 @@ Also need to look over requirements and make sure everything is done
 
 ////////////////////////////////////////////////////////////////////////////
 
+###4/07/2022
+Oracle tests are done, still need to link frontend to smart contracts
+Also still need to look over requirements and make sure everything is done
+
+////////////////////////////////////////////////////////////////////////////
+
 
 # Udacity notes begin here
 # FlightSurety
