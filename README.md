@@ -6,7 +6,7 @@ Solidity - ^0.4.24 (solc-js)
 Node v14.21.3  
 
 ## To get started again
-Run: 'npm run dapp' to start UI
+Run: 'npm run dapp' to start UI  
 Run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20  
 Run: 'npm run server' to start oracle server  
 Run: 'Truffle migrate' if Operational Status isn't working in Dapp  
