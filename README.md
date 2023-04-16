@@ -7,7 +7,7 @@ Node v14.21.3
 
 ## To get started again
 To start UI: npm run dapp  
-To start Blockchain: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20  
+To start Blockchain: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 25  
 To start Oracle Server: npm run server  
 If Operational Status isn't working in Dapp: Truffle migrate  
 

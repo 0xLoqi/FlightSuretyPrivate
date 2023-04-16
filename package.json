@@ -12,7 +12,7 @@
     "dapp": "webpack-dev-server --mode development --config webpack.config.dapp.js",
     "dapp:prod": "webpack --mode production --config webpack.config.dapp.js",
     "server": "rm -rf ./build/server && webpack --config webpack.config.server.js",
-    "chain": "ganache -m \"candy maple cake sugar pudding cream honey rich smooth crumble sweet treat\""
+    "chain": "ganache -m candy maple cake sugar pudding cream honey rich smooth crumble sweet treat -a 20"
   },
   "author": "Nik Kalyani <nik@kalyani.com> https://www.kalyani.com",
   "devDependencies": {
