@@ -36,41 +36,40 @@ contract('Oracles', async (accounts) => {
     }
   });
 
-  //COMMENTED OUT FOR TESTING FOLLOWING TEST TO SAVE TIME
-  // it('can request flight status', async () => {
-  //   // ARRANGE
-  //   let flight = 'ND1309';
-  //   let timestamp = Math.floor(Date.now() / 1000);
-  //   let STATUS_CODE_ON_TIME = 10;
+  it('can request flight status', async () => {
+    // ARRANGE
+    let flight = 'ND1309';
+    let timestamp = Math.floor(Date.now() / 1000);
+    let STATUS_CODE_ON_TIME = 10;
 
-  //   // Register the flight
-  //   await config.flightSuretyData.registerFlight(config.firstAirline, flight, timestamp, { from: config.firstAirline });
+    // Register the flight
+    await config.flightSuretyData.registerFlight(config.firstAirline, flight, timestamp, { from: config.firstAirline });
 
-  //   // Submit a request for oracles to get status information for a flight
-  //   await config.flightSuretyApp.fetchFlightStatus(config.firstAirline, flight, timestamp);
+    // Submit a request for oracles to get status information for a flight
+    await config.flightSuretyApp.fetchFlightStatus(config.firstAirline, flight, timestamp);
 
-  //   // ACT
-  //   for (let a = 1; a < TEST_ORACLES_COUNT; a++) {
-  //     let oracleIndexes = await config.flightSuretyApp.getMyIndexes.call({ from: accounts[a] });
-  //     for (let idx = 0; idx < 3; idx++) {
-  //       try {
-  //         const tx = await config.flightSuretyApp.submitOracleResponse(oracleIndexes[idx], config.firstAirline, flight, timestamp, STATUS_CODE_ON_TIME, { from: accounts[a] });
-  //         console.log(`Oracle ${a} submitted a response`)
-  //         truffleAssert.eventEmitted(tx, 'FlightStatusInfo', (ev) => {
-  //           console.log(`Oracle ${a} : FlightStatusInfo event emitted:`, {
-  //             airline: ev.airline,
-  //             flight: ev.flight,
-  //             timestamp: ev.timestamp.toString(),
-  //             status: ev.status.toString()
-  //           });
-  //         });
-  //       } catch (e) {
-  //         // Enable this when debugging
-  //         //console.log('\nError', idx, oracleIndexes[idx].toNumber(), flight, timestamp);
-  //       }
-  //     }
-  //   }
-  // });
+    // ACT
+    for (let a = 1; a < TEST_ORACLES_COUNT; a++) {
+      let oracleIndexes = await config.flightSuretyApp.getMyIndexes.call({ from: accounts[a] });
+      for (let idx = 0; idx < 3; idx++) {
+        try {
+          const tx = await config.flightSuretyApp.submitOracleResponse(oracleIndexes[idx], config.firstAirline, flight, timestamp, STATUS_CODE_ON_TIME, { from: accounts[a] });
+          console.log(`Oracle ${a} submitted a response`)
+          truffleAssert.eventEmitted(tx, 'FlightStatusInfo', (ev) => {
+            console.log(`Oracle ${a} : FlightStatusInfo event emitted:`, {
+              airline: ev.airline,
+              flight: ev.flight,
+              timestamp: ev.timestamp.toString(),
+              status: ev.status.toString()
+            });
+          });
+        } catch (e) {
+          // Enable this when debugging
+          //console.log('\nError', idx, oracleIndexes[idx].toNumber(), flight, timestamp);
+        }
+      }
+    }
+  });
 
   it('can request flight status and credits accounts when status is late', async () => {
     // ARRANGE
@@ -123,6 +122,7 @@ contract('Oracles', async (accounts) => {
 
     //ASSERT
     //InsurancePaid Event emitted in output
+
 
   });
 

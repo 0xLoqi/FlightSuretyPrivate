@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+  devtool: false,
   entry: ['babel-polyfill', path.join(__dirname, "src/dapp")],
   output: {
     path: path.join(__dirname, "prod/dapp"),
@@ -9,7 +10,7 @@ module.exports = {
   },
   module: {
     rules: [
-    {
+      {
         test: /\.(js|jsx)$/,
         use: "babel-loader",
         exclude: /node_modules/
@@ -32,8 +33,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ 
-      template: path.join(__dirname, "src/dapp/index.html")
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "src/dapp/index.html"),
+      favicon: path.join(__dirname, "src/dapp/favicon.ico")
     })
   ],
   resolve: {

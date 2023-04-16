@@ -95,9 +95,10 @@ contract FlightSuretyApp {
      *
      */
     function registerAirline(
-        address newAirline
+        address newAirline,
+        string airlineName
     ) external requireIsOperational returns (bool success) {
-        flightSuretyData.registerAirline(newAirline);
+        flightSuretyData.registerAirline(newAirline, airlineName);
         success = true;
     }
 
@@ -143,6 +144,10 @@ contract FlightSuretyApp {
 
     function withdraw() external requireIsOperational {
         flightSuretyData.withdraw();
+    }
+
+    function fund() external payable requireIsOperational {
+        flightSuretyData.fund.value(msg.value)();
     }
 
     /**

@@ -42,3 +42,12 @@ label.form {
 input {
     margin-right: 30px;
 }
+
+.readonly-input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: auto;
+    padding: 0;
+}

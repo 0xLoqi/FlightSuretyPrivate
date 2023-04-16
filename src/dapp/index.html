@@ -10,7 +10,6 @@
 </head>
 
 <body>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">FlightSurety</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -25,31 +24,39 @@
                 <div id="display-wrapper" class="top-20">
                     <hr>
                 </div>
+                <div class="row top-20">
+                    <div class="col-md-12">
+                        <hr>
+                        <p>Initiate payout to your wallet</p>
+                        <button class="btn btn-primary" id="withdraw-funds">Withdraw Insurance Payout</button>
+                    </div>
+                </div>
+                <hr>
                 <h3>Purchase Flight Insurance</h3>
                 <hr>
-                <form>
+                <form id="purchase-insurance-form">
                     <div class="form-group">
                         <label for="airline-address">Airline Address</label>
-                        <input type="text" class="form-control" id="airline-address"
-                            placeholder="Enter airline address">
+                        <select class="form-control" id="airline-address">
+                            <!-- These should be all of the registered flights (ideally) -->
+                            <option>0xf17f52151EbEF6C7334FAD080c5704D77216b732</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label for="airline-name">Airline Name</label>
-                        <input type="text" class="form-control" id="airline-name" placeholder="Enter airline name">
-                    </div>
+
+
                     <div class="form-group">
                         <label for="flight-number">Flight Number</label>
-                        <select class="form-control" id="flight-number">
-                            <!-- Replace these options with your actual flight numbers and departures -->
-                            <option>Flight 1 - Departure</option>
-                            <option>Flight 2 - Departure</option>
-                            <option>Flight 3 - Departure</option>
+                        <select class="form-control" id="purchase-flight-number">
+                            <!-- Ideally these are pulled from registered flights, but not implementing this in this project -->
+                            <option>ND1309</option>
+                            <option>ND1310</option>
+                            <option>ND1311</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="insurance-amount">Insurance Amount (max 1 Ether)</label>
+                        <label for="insurance-amount">Insurance Amount</label>
                         <input type="number" class="form-control" id="insurance-amount" min="0" max="1" step="0.01"
-                            placeholder="Enter insurance amount">
+                            placeholder="Up to 1 Eth Maximum">
                     </div>
                     <button type="submit" class="btn btn-primary">Purchase Insurance</button>
                 </form>
@@ -62,15 +69,16 @@
             <div class="col-md-12">
                 <h3>Request Flight Status Update</h3>
                 <hr>
+                <div class="form-group">
+                    <label for="flight-number">Flight Number</label>
+                    <select class="form-control" id="flight-number">
+                        <!-- Ideally these are pulled from registered flights, but not implementing this in this project -->
+                        <option>ND1309</option>
+                        <option>ND1310</option>
+                        <option>ND1311</option>
+                    </select>
+                </div>
                 <button class="btn btn-primary" id="submit-oracle">Submit to Oracles</button>
-            </div>
-        </div>
-
-        <div class="row top-20">
-            <div class="col-md-12">
-                <h3>Withdraw Funds</h3>
-                <hr>
-                <button class="btn btn-primary" id="withdraw-funds">Withdraw Funds</button>
             </div>
         </div>
 
@@ -78,16 +86,44 @@
         <div class="row top-20">
             <div class="col-md-12">
                 <h3>Register a New Airline</h3>
+                <p>Registered airlines can register new airlines (unless there are >4 airlines registerred; then an
+                    airline must be registered by at least 50% of current registtered airlines.) </p>
                 <hr>
-                <form>
+                <form id="register-airline-form">
+                    <div class="form-group">
+                        <label for="airline-name">Airline Name</label>
+                        <input type="text" class="form-control" id="new-airline-name" placeholder="Enter airline name">
+                    </div>
                     <div class="form-group">
                         <label for="new-airline-address">New Airline Address</label>
                         <input type="text" class="form-control" id="new-airline-address"
                             placeholder="Enter new airline address">
                     </div>
+
                     <button type="submit" class="btn btn-primary">Register Airline</button>
                 </form>
-                <p class="mt-3">Note: Only registered airlines can register new airlines.</p>
+            </div>
+        </div>
+        <!-- Add this new section for a registered airline to submit funding -->
+        <div class="row top-20">
+            <div class="col-md-12">
+                <h3>Airline Funding</h3>
+                <hr>
+                <form id="airline-funding-form">
+                    <div class="form-group">
+                        <p>Airlines that have already been registered, can use this form to fund the contract</p>
+                        <label for="funding-airline-address">Airline Address</label>
+                        <input type="text" class="form-control" id="funding-airline-address"
+                            placeholder="Enter airline address">
+                    </div>
+                    <div class="form-group">
+                        <label for="funding-amount">Funding Amount (10 Ether required)</label>
+                        <input type="number" class="form-control" id="funding-amount" min="10" max="10" placeholder="10"
+                            value="10">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Funding</button>
+                </form>
+                <p class="mt-3">An airline must submit at least 10 Ether to participate in the contract.</p>
             </div>
         </div>
     </main>

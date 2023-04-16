@@ -6,13 +6,41 @@ Solidity - ^0.4.24 (solc-js)
 Node v14.21.3  
 
 ## To get started again
-Run: 'npm run dapp' to start UI  
-Run: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20  
-Run: 'npm run server' to start oracle server  
-Run: 'Truffle migrate' if Operational Status isn't working in Dapp  
+To start UI: npm run dapp  
+To start Blockchain: ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 20  
+To start Oracle Server: npm run server  
+If Operational Status isn't working in Dapp: Truffle migrate  
 
 ## Notes
-### 3/31/2022
+////////////////////////////////////////////////////////////////////////////
+
+### 4/15/2023
+Cut short last session; refactored flight registation to include name of airline due to weird requirements in the rubric, but honestly, probably just not going to use that. It's not going to be
+"user friendly" to buy insurance with the address of the flight but I don't think it's worth the time to change it. The weird requirement is that there should be fields for both the name and the address in the passenger section but they're always going to be mapped to each other anyways so it's just going to be based on address.
+
+index.html links to index.js and contract.js, contract.js links to flightSuretyApp.js and flightSuretyData.js. All buttons hitting smart contract functions. All smart contract functions work.
+////////////////////////////////////////////////////////////////////////////
+
+### 4/12/2023
+Haven't been able to work on this for a bit, but happy to be back.  
+We also got an extra week so it looks like the new due date is Friday April 21st.
+
+////////////////////////////////////////////////////////////////////////////
+
+### 4/07/2023
+Oracle tests are done, still need to link frontend to smart contracts  
+Also still need to look over requirements and make sure everything is done
+
+////////////////////////////////////////////////////////////////////////////
+
+### 4/05/2023
+Oracle tests were fixed, still need to create another test to validate payouts on bad status, should be easy enough to just copy test and change status code
+Also still need to link frontend to smart contracts
+Also need to look over requirements and make sure everything is done
+
+////////////////////////////////////////////////////////////////////////////
+
+### 3/31/2023
 All Contracts are done I think, seem to be passing tests, pretty sure functionality is complete
 probably would want to run through tests again (maybe just check rubric for requirements)
 
@@ -27,24 +55,9 @@ https://www.notion.so/elijahwilbanks/Final-Project-Rubric-edfb4d3d523248a3bc7bd8
 
 Due date is exactly 14 days away, should be easy to finish in time
 
-////////////////////////////////////////////////////////////////////////////
-
-### 4/05/2022
-Oracle tests were fixed, still need to create another test to validate payouts on bad status, should be easy enough to just copy test and change status code
-Also still need to link frontend to smart contracts
-Also need to look over requirements and make sure everything is done
-
-////////////////////////////////////////////////////////////////////////////
-
-### 4/07/2022
-Oracle tests are done, still need to link frontend to smart contracts  
-Also still need to look over requirements and make sure everything is done
-
-////////////////////////////////////////////////////////////////////////////
-
 
 # Udacity notes begin here
-# FlightSurety
+## FlightSurety
 
 FlightSurety is a sample application project for Udacity's Blockchain course.
 

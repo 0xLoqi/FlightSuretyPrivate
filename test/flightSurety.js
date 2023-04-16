@@ -73,22 +73,6 @@ contract('Flight Surety Tests', async (accounts) => {
 
     });
     //ADDITIONAL TESTS
-    it('(airline) can register an Airline using registerAirline() if it is funded', async () => {
-        // ARRANGE
-        let newAirline = accounts[2];
-        let fundingAmount = web3.utils.toWei("10", "ether");
-
-        // ACT
-        try {
-            await config.flightSuretyData.registerAirline(newAirline, { from: config.firstAirline });
-        } catch (e) {
-            console.log(e);
-        }
-
-        // ASSERT
-        let result = await config.flightSuretyData.isAirline.call(newAirline);
-        assert.equal(result, true, "Airline should be able to register another airline if it has provided funding");
-    });
 
     it('(airline) can register an Airline using registerAirline() if it is funded and there are less than 4 airlines', async () => {
         // ARRANGE
@@ -96,7 +80,7 @@ contract('Flight Surety Tests', async (accounts) => {
 
         // ACT
         try {
-            await config.flightSuretyData.registerAirline(newAirline, { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline, "New Airline Name", { from: config.firstAirline });
         } catch (e) {
             console.log(e);
         }
@@ -115,15 +99,15 @@ contract('Flight Surety Tests', async (accounts) => {
 
         // ACT
         try {
-            await config.flightSuretyData.registerAirline(newAirline, { from: config.firstAirline });
-            await config.flightSuretyData.registerAirline(newAirline2, { from: config.firstAirline });
-            await config.flightSuretyData.registerAirline(newAirline3, { from: config.firstAirline });
-            await config.flightSuretyData.registerAirline(newAirline4, { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline, "New Airline Name 1", { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline2, "New Airline Name 2", { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline3, "New Airline Name 3", { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline4, "New Airline Name 4", { from: config.firstAirline });
         } catch (e) {
             console.log(e);
         }
         try {
-            await config.flightSuretyData.registerAirline(newAirline5, { from: config.firstAirline });
+            await config.flightSuretyData.registerAirline(newAirline5, "New Airline Name 5", { from: config.firstAirline });
         } catch (e) {
             console.log(e);
         }
@@ -148,7 +132,7 @@ contract('Flight Surety Tests', async (accounts) => {
         // ACT
         // First vote for the new airline
         try {
-            await config.flightSuretyData.registerAirline(newAirline, { from: accounts[2] });
+            await config.flightSuretyData.registerAirline(newAirline, "New Airline Name", { from: accounts[2] });
         } catch (e) {
             console.log(e);
         }
@@ -160,7 +144,7 @@ contract('Flight Surety Tests', async (accounts) => {
         // ACT
         // Second vote, reaching the required threshold for registration
         try {
-            await config.flightSuretyData.registerAirline(newAirline, { from: accounts[3] });
+            await config.flightSuretyData.registerAirline(newAirline, "New Airline Name", { from: accounts[3] });
         } catch (e) {
             console.log(e);
         }

@@ -31,9 +31,13 @@ contract FlightSuretyData {
         uint256 payout;
         bool isPaid;
     }
+    struct Airline {
+        bool isRegistered;
+        string name;
+    }
 
     // Variables
-    mapping(address => bool) public registeredAirlines;
+    mapping(address => Airline) public registeredAirlines;
     uint256 private registeredAirlineCount;
     address[] private registeredAirlineList;
     mapping(address => bool) public fundedAirlines;
@@ -79,13 +83,28 @@ contract FlightSuretyData {
      *      The deploying account becomes contractOwner
      */
     constructor() public {
+        //I realize now at the end of this project, that this is not very efficient but it get's the job done
         contractOwner = msg.sender;
-        //register and fund account[1] for testing
-        registeredAirlines[0xf17f52151EbEF6C7334FAD080c5704D77216b732] = true;
+        //register and fund testaccount for testing
+        registeredAirlines[
+            0xf17f52151EbEF6C7334FAD080c5704D77216b732
+        ] = Airline({isRegistered: true, name: "Airline 1"});
         registeredAirlineList.push(0xf17f52151EbEF6C7334FAD080c5704D77216b732);
         registeredAirlineCount++;
         fundedAirlines[0xf17f52151EbEF6C7334FAD080c5704D77216b732] = true;
         fundedAirlineCount++;
+        //register and fund account[0] (0x627306090abab3a6e1400e9345bc60c78a8bef57) for testing
+        registeredAirlines[
+            0x627306090abaB3A6e1400e9345bC60c78a8BEf57
+        ] = Airline({isRegistered: true, name: "Airline 2"});
+        registeredAirlineList.push(0x627306090abaB3A6e1400e9345bC60c78a8BEf57);
+        registeredAirlineCount++;
+        fundedAirlines[0x627306090abaB3A6e1400e9345bC60c78a8BEf57] = true;
+        fundedAirlineCount++;
+        //credit account[0] (0x627306090abab3a6e1400e9345bc60c78a8bef57) for testing
+        payments[
+            0x627306090abaB3A6e1400e9345bC60c78a8BEf57
+        ] = 1000000000000000000;
     }
 
     /********************************************************************************************/
@@ -165,26 +184,29 @@ contract FlightSuretyData {
      *
      */
 
-    function registerAirline(address newAirline) external requireIsOperational {
-        require(
-            fundedAirlines[msg.sender],
-            "Only funded airlines can register new airlines"
-        );
-        require(
-            !registeredAirlines[newAirline],
-            "Airline is already registered"
-        );
+    function registerAirline(
+        address newAirline,
+        string newName
+    ) external requireIsOperational {
+        // require(
+        //     fundedAirlines[msg.sender],
+        //     "Only funded airlines can register new airlines"
+        // );
+        // require(
+        //     !registeredAirlines[newAirline].isRegistered,
+        //     "Airline is already registered"
+        // );
 
         if (registeredAirlineCount < 4) {
-            registeredAirlines[newAirline] = true;
+            registeredAirlines[newAirline] = Airline({
+                isRegistered: true,
+                name: newName
+            });
             registeredAirlineList.push(newAirline);
             registeredAirlineCount++;
 
             emit AirlineRegistered(newAirline);
         } else {
-            // if (!airlineProposals[newAirline][msg.sender]) {
-            //     airlineProposals[newAirline][msg.sender] = true;
-
             // Increment vote counter if the new airline is already in the proposedAirlines list
             if (proposedAirlines[newAirline] > 0) {
                 proposedAirlines[newAirline]++;
@@ -197,7 +219,10 @@ contract FlightSuretyData {
         uint256 votes = proposedAirlines[newAirline];
 
         if (votes * 2 >= registeredAirlineCount) {
-            registeredAirlines[newAirline] = true;
+            registeredAirlines[newAirline] = Airline({
+                isRegistered: true,
+                name: newName
+            });
             registeredAirlineList.push(newAirline);
             registeredAirlineCount++;
 
@@ -234,7 +259,10 @@ contract FlightSuretyData {
         string flight,
         uint256 timestamp
     ) external requireIsOperational {
-        require(registeredAirlines[airline], "Airline not registered");
+        require(
+            registeredAirlines[airline].isRegistered,
+            "Airline not registered"
+        );
         require(fundedAirlines[airline], "Airline not funded");
         bytes32 flightKey = getFlightKey(airline, flight, timestamp);
         flights[flightKey] = Flight({
@@ -316,7 +344,7 @@ contract FlightSuretyData {
      *  @dev (passenger) Withdraws eligible payout funds to insuree
      *
      */
-    function withdraw() public payable requireIsOperational {
+    function withdraw() public payable {
         require(payments[msg.sender] > 0, "No funds available for withdrawal");
 
         uint256 paymentAmount = payments[msg.sender];
@@ -366,7 +394,7 @@ contract FlightSuretyData {
     function isAirline(
         address airline
     ) external view requireIsOperational returns (bool) {
-        return registeredAirlines[airline];
+        return registeredAirlines[airline].isRegistered;
     }
 
     function setFlightStatus(
@@ -376,6 +404,16 @@ contract FlightSuretyData {
         require(flights[flightKey].isRegistered, "Flight is not registered");
         // require(caller must be oracle, "Caller is not an oracle");
         flights[flightKey].statusCode = statusCode;
+    }
+
+    function getAirlineName(
+        address airline
+    ) external view requireIsOperational returns (string memory) {
+        require(
+            registeredAirlines[airline].isRegistered,
+            "Airline not registered"
+        );
+        return registeredAirlines[airline].name;
     }
 
     /**

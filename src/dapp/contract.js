@@ -43,10 +43,11 @@ export default class Contract {
     async purchaseInsurance(airlineAddress, flightNumber, insuranceAmount) {
         let self = this;
         let amountInWei = this.web3.utils.toWei(insuranceAmount, "ether");
+        let timestamp = Math.floor(Date.now() / 1000);
 
         try {
             await self.flightSuretyApp.methods
-                .buyInsurance(airlineAddress, flightNumber)
+                .buyInsurance(airlineAddress, flightNumber, timestamp)
                 .send({ from: self.passengers[0], value: amountInWei });
             alert("Insurance purchased successfully.");
         } catch (error) {
@@ -55,12 +56,13 @@ export default class Contract {
         }
     }
 
-    async registerAirline(newAirlineAddress) {
+
+    async registerAirline(newAirlineAddress, newAirlineName) {
         let self = this;
 
         try {
             await self.flightSuretyApp.methods
-                .registerAirline(newAirlineAddress)
+                .registerAirline(newAirlineAddress, newAirlineName)
                 .send({ from: self.owner });
             alert("New airline registered successfully.");
         } catch (error) {
@@ -83,17 +85,34 @@ export default class Contract {
             });
     }
 
-    async withdrawFunds() {
+    async withdrawInsurancePayout() {
         let self = this;
 
         try {
             await self.flightSuretyApp.methods
                 .withdraw()
-                .send({ from: self.passengers[0] });
-            alert("Funds withdrawn successfully.");
+                .send({ from: self.owner });
+            alert("Insurance payout withdrawn successfully.");
         } catch (error) {
             console.log(error);
-            alert("Failed to withdraw funds.");
+            alert("Failed to withdraw insurance payout.");
         }
     }
+
+
+    async submitAirlineFunding(airlineAddress, fundingAmount) {
+        let self = this;
+        let amountInWei = this.web3.utils.toWei(fundingAmount, "ether");
+
+        try {
+            await self.flightSuretyApp.methods
+                .fund()
+                .send({ from: airlineAddress, value: amountInWei });
+            alert("Funding submitted successfully.");
+        } catch (error) {
+            console.log(error);
+            alert("Failed to submit funding.");
+        }
+    }
+
 }
