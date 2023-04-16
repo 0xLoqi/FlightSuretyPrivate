@@ -19,6 +19,8 @@ Cut short last session; refactored flight registation to include name of airline
 "user friendly" to buy insurance with the address of the flight but I don't think it's worth the time to change it. The weird requirement is that there should be fields for both the name and the address in the passenger section but they're always going to be mapped to each other anyways so it's just going to be based on address.
 
 index.html links to index.js and contract.js, contract.js links to flightSuretyApp.js and flightSuretyData.js. All buttons hitting smart contract functions. All smart contract functions work.
+
+Went ahead and submitted it, got kicked back because I didn't realize that just because the oracle tests are working, doesn't mean the server is preconfigured to work with the oracles (go figure). Fixed that (I think) and resubmitted.
 ////////////////////////////////////////////////////////////////////////////
 
 ### 4/12/2023
